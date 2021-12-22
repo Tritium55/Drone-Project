@@ -1,3 +1,7 @@
+#include "return_home.h"
+
+#define return_home rh
+
 #define CH1 1
 #define CH2 2
 #define CH3 3
@@ -17,7 +21,8 @@ void mapReads(int lowChannel, int highChannel);
 //maps all read values from function void readChannels
 int evaluateCh6(void);
 //returns 0, 1 or 2 depending on which value is currently mapped on pulse_map_CH6
-bool returnHome(void);
+
+//bool rh.returnHome(void);
 //complex function which returns the drone home
 
 void setup() {
