@@ -1,0 +1,12 @@
+1x Arduino Nano: 5,3                     :4
+4x mini breadboards			 :8                   
+1x Case                              	 :16.65
+4x motors: 3,5                           :44
+1x akku: 40                              :30
+1x 4 in 1 Esc: 5,2                       :20
+4x Propeller: 2,2                        :12
+1x reciever: 0,9                         :10
+Randomshit:20                            :5
+sensor:                                  :5
+fernb :                                  :70
+1x Gyroskop                              :2
