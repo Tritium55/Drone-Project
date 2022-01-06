@@ -4,7 +4,7 @@ Servo brushless3;
 
 #define brushlessNr3 8
 
-int var_speed = 400;
+int var_speed = 20;
 
 int temp;
 
