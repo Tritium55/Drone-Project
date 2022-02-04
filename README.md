@@ -3,7 +3,7 @@ Indoor drone with return home function
 
 
 # ToDo-List
-- [Electronics] Voltage converter ESP-32/ TSR 2-2450/ L7805 https://www.youtube.com/watch?v=lBuJ75HjhUs
+- [Electronics] Voltage converter TSR 2-2450/ L7805 https://www.youtube.com/watch?v=lBuJ75HjhUs - DONE: no need because of inbuilt AMS1117
 - [Electronics] using fuse for lipo 
 - [Electronics] PCB design and soldering
 - [Electronics] Ultrasonic sensor
