@@ -17,7 +17,7 @@ void loop(){
   delay(40);
   
   Serial.print("CH1 ") ;
-  Serial.println(IBus.readChannel(5));
+  Serial.println(IBus.readChannel(2));
 //  Serial.println("CH2 ") ;
 //  Serial.println(IBus.readChannel(1), DEC);
 //  Serial.println("CH3 ") ;
