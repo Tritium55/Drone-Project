@@ -18,6 +18,10 @@ void loop(){
   
   Serial.print("CH1 ") ;
   Serial.println(IBus.readChannel(2));
+  delay(1000);
+  Serial.println(IBus.readChannel(2));
+  delay(2000);
+  Serial.println();
 //  Serial.println("CH2 ") ;
 //  Serial.println(IBus.readChannel(1), DEC);
 //  Serial.println("CH3 ") ;

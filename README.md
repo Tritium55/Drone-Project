@@ -1,17 +1,18 @@
-# Drone-Project
+# Project-ZORA
 Indoor drone with return home function
 
 
 # ToDo-List
 - [Electronics] Voltage converter TSR 2-2450/ L7805 https://www.youtube.com/watch?v=lBuJ75HjhUs - DONE: no need because of inbuilt AMS1117
-- [Electronics] using fuse for lipo 
+- [Electronics] using fuse for lipo - IGNORED
 - [Electronics] PCB design and soldering
 - [Electronics] Ultrasonic sensor
+- [Electronics] IR sensor
 
-- [3D_Design] Bottom Body
+- [3D_Design] Bottom Body - DONE
 - [3D_Design] Top Body
 
-- [Code] Ibus Receiver
+- [Code] Ibus Receiver - DONE
 - [Code] Return Home
 - [Code] Flight Software
 - [Code] RHS - Return Home System

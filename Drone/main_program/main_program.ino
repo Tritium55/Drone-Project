@@ -1,13 +1,13 @@
 #include "return_home.h"
-#include <Servo.h>
+#include "motor_control.h"
+#include "IBUS_Receiver.h"
 
-#define return_home rh
+#define return_home Rh
+#define motor_control Mc
+#define IBus_Receiver_Drone IBus
 
-#define CH1 1
-#define CH2 2
-#define CH3 3
-#define CH4 4
-#define CH6 6
+Mc m1, m2, m3, m4;    //create brushless motors
+delay(5000);          //delay to let the ESC's initialize them
 
 int pulse_read_CH1, pulse_read_CH2, pulse_read_CH3, pulse_read_CH4;
 int pulse_read_CH6;
