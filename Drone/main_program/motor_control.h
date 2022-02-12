@@ -1,6 +1,8 @@
 #ifndef motor_control_h
 #define motor_control_h
 
+#include <Servo.h>
+
 class BrushlessMotor{
     private:
         Servo motorType;

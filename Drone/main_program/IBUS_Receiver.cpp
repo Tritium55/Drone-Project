@@ -4,16 +4,27 @@
 #include "FlySkyIBus_Decoder.h"
 
 IBus_Receiver::IBus_Receiver(){
+    for(int i=0; i<nr_of_channels; i++){
+        self.channels[i].setChannelNr(i);
+    }
+
     Serial.begin(115200);
-    FlySkyIBus.begin(Serial);
+    IBus.begin(Serial);
 }
 
-void IBus_Receiver::readChannels1to4(void){
+Channels1to4_read Channels1to4;
 
+Channels1to4_read IBus_Receiver::readChannels1to4(void){
+    IBus.loop();
+    for(int i=0; i<4; i++){
+        Channels1to4.arr[i] = self.channels[i].readValue();
+    }
+    return Channels1to4;
 }
 
-void IBus_Receiver::readChannel6(void){
-
+int IBus_Receiver::readChannel6(void){
+    IBus.loop();
+    return self.channels[5].readValue();
 }
 
 
@@ -27,8 +38,12 @@ class Channel{
         void setChannelNr(int x);
 }
 
+Channel::Channel(){
+}
+
 int Channel::readValue(void){
-    self.read = FlySkyIBus.readChannel(self.channelNr);
+    self.read = IBus.readChannel(self.channelNr);
+    return self.read;
 }
 
 void Channel::setChannelNr(int x){

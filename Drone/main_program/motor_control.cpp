@@ -1,5 +1,3 @@
-#include <Servo.h>
-
 #include "Arduino.h"
 #include "motor_control.h"
 
@@ -16,9 +14,5 @@ void BrushlessMotor::setSpeed(int speed){
 }
 
 void BrushlessMotor::writeMotor(void){
-    int temp = map(speed, 0, 1000, 1000, 2000);
-    motorType.writeMicroseconds(temp);
+    self.motorType.writeMicroseconds(map(speed, 0, 1000, 1000, 2000));
 }
-
-
-BrushlessMotor motor_control = BrushlessMotor();
