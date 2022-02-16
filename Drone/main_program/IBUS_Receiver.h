@@ -15,7 +15,7 @@ class IBus_Receiver{
 
 typedef struct Channels1to4_read{
     int arr[4];
-}
+}Channels1to4;
 
 extern IBUS_Receiver IBus_Receiver_Drone;
 

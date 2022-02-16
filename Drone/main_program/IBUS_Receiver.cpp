@@ -12,8 +12,6 @@ IBus_Receiver::IBus_Receiver(){
     IBus.begin(Serial);
 }
 
-Channels1to4_read Channels1to4;
-
 Channels1to4_read IBus_Receiver::readChannels1to4(void){
     IBus.loop();
     for(int i=0; i<4; i++){

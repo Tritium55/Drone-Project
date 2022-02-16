@@ -10,9 +10,17 @@ BrushlessMotor::BrushlessMotor(int pin){
 
 void BrushlessMotor::setSpeed(int speed){
     self.speed = speed;
-    self.writeMotor();
 }
 
 void BrushlessMotor::writeMotor(void){
-    self.motorType.writeMicroseconds(map(speed, 0, 1000, 1000, 2000));
+    self.motorType.writeMicroseconds(map(self.speed, 0, 1000, 1000, 2000));
+}
+
+
+//resets speed of all motors
+void reset_speed(void){
+    m1.setSpeed(0);
+    m2.setSpeed(0);
+    m3.setSpeed(0);
+    m4.setSpeed(0);
 }
