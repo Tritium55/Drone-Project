@@ -6,16 +6,12 @@
 class BrushlessMotor{
     private:
         Servo motorType;
-        int speed;                      //range of 0 - 1000
-        void writeMotor(void);          //write private var speed to motor
+        int spd;                        //range of 0 - 1000
         int pin;
     public:
         BrushlessMotor(int pin);
-        void setSpeed(int speed);       //public method to set speed of motor
-}m1(BrushlessNr1), m2(BrushlessNr2), m3(BrushlessNr3), m4(BrushlessNr4);
-
-void reset_speed(void);
-
-extern BrushlessMotor motor_control;
+        void writeMotor(void);          //write private var speed to motor
+        void setSpd(int spd);         //public method to set speed of motor
+};
 
 #endif

@@ -1,16 +1,12 @@
-#include <algorithm>
-#include <initializer_list>
-
 #include "return_home.h"
 #include "motor_control.h"
 #include "IBUS_Receiver.h"
 
 #define return_home Rh
-#define BrushlessMotor Mc
 #define IBus_Receiver_Drone IBus
 
 
-
+//pins of brushless motors
 #define BrushlessNr1 8
 #define BrushlessNr2 9
 #define BrushlessNr3 10
@@ -25,17 +21,15 @@
 #define CH_3_MAX_THROTTLE 1000
 
 
-/*
-//Mc m1, m2, m3, m4;    //create brushless motors
+//create brushless motors
 BrushlessMotor m1(BrushlessNr1);
 BrushlessMotor m2(BrushlessNr2);
 BrushlessMotor m3(BrushlessNr3);
 BrushlessMotor m4(BrushlessNr4);
-delay(5000);          //delay to let the ESC's initialize them
-*/
 
-IBus_Receiver_Drone receiver;
 
+IBus_Receiver receiver;                 //receiver init
+Channels1to4_read Channels1to4;         //for return value of channel read
 
 int pulse_map_CH1, pulse_map_CH2, pulse_map_CH3, pulse_map_CH4;
 
@@ -63,6 +57,14 @@ void write_motors(void){
   m4.writeMotor();
 }
 
+//resets speed of all motors
+void reset_speed(void){
+    m1.setSpd(0);
+    m2.setSpd(0);
+    m3.setSpd(0);
+    m4.setSpd(0);
+}
+
 //power off for drone
 void shutdown(){
   reset_speed();
@@ -76,6 +78,11 @@ void setup() {
   delay(5000);                      //delay for ESC init
 }
 
+int max_of_4(int a, int b, int c, int d){
+  int temp1 = max(a, b);
+  int temp2 = max(c, d);
+  return max(temp1, temp2);
+}
 
 
 int temp_spd1, temp_spd2, temp_spd3, temp_spd4;
@@ -89,7 +96,7 @@ void loop() {
 
   temp_spd1 = temp_spd2 = temp_spd3 = temp_spd4 = 0;
 
-  Channels1to4.arr = receiver.readChannels1to4();
+  Channels1to4 = receiver.readChannels1to4();
   pulse_map_CH1 = map(Channels1to4.arr[0], 1000, 2000, CH_1_2_4_SENS_LOW, CH_1_2_4_SENS_HIGH);
   pulse_map_CH2 = map(Channels1to4.arr[1], 1000, 2000, CH_1_2_4_SENS_LOW, CH_1_2_4_SENS_HIGH);
   pulse_map_CH3 = map(Channels1to4.arr[2], 1000, 2000, CH_3_MIN_THROTTLE, CH_3_MAX_THROTTLE);
@@ -107,6 +114,7 @@ void loop() {
   /* */
 
 
+
   //add spd of CH1 to motors      ROLL
   if(pulse_map_CH1>0){
     temp_spd3 += pulse_map_CH1;
@@ -116,6 +124,7 @@ void loop() {
     temp_spd1 += pulse_map_CH1;
     temp_spd2 += pulse_map_CH1;
   }
+
 
   //add spd of CH2 to motors      PITCH
   if(pulse_map_CH2>0){
@@ -127,6 +136,7 @@ void loop() {
     temp_spd4 += pulse_map_CH2;
   }
 
+
   //add spd of CH4 to motors      YAW
   if(pulse_map_CH4>0){
     temp_spd1 += pulse_map_CH4;
@@ -137,8 +147,9 @@ void loop() {
     temp_spd3 += pulse_map_CH4;
   }
 
+
   //add spd of CH3 to motors      THROTTLE
-  int temp_comparison = std::max({temp_spd1, temp_spd2, temp_spd3, temp_spd4});
+  int temp_comparison = max_of_4(temp_spd1, temp_spd2, temp_spd3, temp_spd4);
   if(temp_comparison+pulse_map_CH3 >= CH_3_MAX_THROTTLE){                       //bounds detection to not surpass motor spd limit
     int temp_val = (temp_comparison + pulse_map_CH3) - CH_3_MAX_THROTTLE;
     temp_spd1 += pulse_map_CH3 - temp_val;
@@ -154,13 +165,11 @@ void loop() {
   }
 
 
-  m1.setSpeed(temp_spd1);
-  m2.setSpeed(temp_spd2);
-  m3.setSpeed(temp_spd3);
-  m4.setSpeed(temp_spd4);
+  //write speeds to ESC's and set speeds to 0 afterwards
+  m1.setSpd(temp_spd1);
+  m2.setSpd(temp_spd2);
+  m3.setSpd(temp_spd3);
+  m4.setSpd(temp_spd4);
   write_motors();
   reset_speed();                    //sets speed of all motors to 0
 }
-
-
-CH_3_MAX_THROTTLE = pulse_map_CH3 - temp_comp - pulse_map_CH3 + CH_3_MAX_THROTTLE + temp_comp;

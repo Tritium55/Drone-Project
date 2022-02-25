@@ -5,7 +5,7 @@
 
 IBus_Receiver::IBus_Receiver(){
     for(int i=0; i<nr_of_channels; i++){
-        self.channels[i].setChannelNr(i);
+        channels[i].setChannelNr(i);
     }
 
     Serial.begin(115200);
@@ -14,38 +14,28 @@ IBus_Receiver::IBus_Receiver(){
 
 Channels1to4_read IBus_Receiver::readChannels1to4(void){
     IBus.loop();
+
+    Channels1to4_read temp;
     for(int i=0; i<4; i++){
-        Channels1to4.arr[i] = self.channels[i].readValue();
+        temp.arr[i] = channels[i].readValue();
     }
-    return Channels1to4;
+    return temp;
 }
 
 int IBus_Receiver::readChannel6(void){
     IBus.loop();
-    return self.channels[5].readValue();
+    return channels[5].readValue();
 }
 
-
-class Channel{
-    private:
-        int read;
-        int channelNr;
-    public:
-        Channel();
-        int readValue(void);
-        void setChannelNr(int x);
-}
 
 Channel::Channel(){
 }
 
 int Channel::readValue(void){
-    self.read = IBus.readChannel(self.channelNr);
-    return self.read;
+    value = IBus.readChannel(channelNr);
+    return value;
 }
 
 void Channel::setChannelNr(int x){
-    self.channelNr = x;
+    channelNr = x;
 }
-
-IBus_Receiver IBus_Receiver_Drone = IBUS_Receiver();
