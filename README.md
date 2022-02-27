@@ -1,6 +1,5 @@
 # Drone-Project
-Project Zora
-Indoor drone with return home function
+Project Zora - Indoor drone with return home function
 
 
 # ToDo-List
