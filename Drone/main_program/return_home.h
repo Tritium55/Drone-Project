@@ -5,6 +5,7 @@ class rclass{
   public:
     rclass();
     bool returnHome();
+    void sensor_setup();
 }
 
 extern return_home;
